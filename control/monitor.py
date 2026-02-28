@@ -52,17 +52,10 @@ def analyze_data():
         city = item["station__location__city__name"]
         user = item["station__user__username"]
 
-        if item["check_value"] > max_value or item["check_value"] < min_value:
-            message = "ALERT {} {} {}".format(variable, min_value, max_value)
+        if item["check_value"] > max_value:
+            message = "OPENING HATCH TO REFRESH"
             topic = "{}/{}/{}/{}/in".format(country, state, city, user)
             print(datetime.now(), "Sending alert to {} {}".format(topic, variable))
-            client.publish(topic, message)
-            alerts += 1
-
-        elif variable.lower() == "temperatura" and item["check_value"] > 28:
-            message = "ALERTA CRITICA TEMPERATURA ALTA"
-            topic = "{}/{}/{}/{}/in".format(country, state, city, user)
-            print(datetime.now(), "Sending CRITICAL alert to {}".format(topic))
             client.publish(topic, message)
             alerts += 1
 
