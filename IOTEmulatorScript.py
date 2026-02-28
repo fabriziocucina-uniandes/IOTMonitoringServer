@@ -27,14 +27,15 @@ import paho.mqtt.client as mqtt
 """
 Dirección IP y puerto del servidor MQTT
 """
-MQTT_HOST = "54.81.108.197"  # "ip.maquina.mqtt"
+MQTT_HOST = "18.234.91.69"  # "ip.maquina.mqtt"
 MQTT_PORT = 8082
 
 """
 Usuario y contraseña para la conexión MQTT
 """
-MQTT_USER = "user1"  # "UsuarioMQTT"
-MQTT_PASSWORD = "123456"
+MQTT_USER = "admin"  # "UsuarioMQTT"
+MQTT_PASSWORD = "admin"  # "ContraseñaMQTT"
+
 
 """
 Topicos de suscripción y publicación
@@ -54,15 +55,15 @@ MEASURE_INTERVAL = 2
 Valor medio de la temperatura en grados Celsius
 que el emulador genera y la variación de la temperatura
 """
-TEMPERATURE_VALUE = 30
-TEMPERATURE_VARIATION = 0
+TEMPERATURE_VALUE = 29
+TEMPERATURE_VARIATION = 0.50
 
 """
 Valor medio de la humedad en porcentaje
 que el emulador genera y la variación de la humedad
 """
-MOISTURE_VALUE = 60.0
-MOISTURE_VARIATION = 5.0
+MOISTURE_VALUE = 80
+MOISTURE_VARIATION = 0.50
 
 
 def process_message(msg: str):
@@ -118,7 +119,6 @@ def on_connect(client, userdata, flags, rc):
     """
     print("Connected with result: " + mqtt.connack_string(rc))
     client.subscribe(MQTT_SUB_TOPIC)
-    print("Subscribed to:", MQTT_SUB_TOPIC)
 
 
 def on_message(client, userdata, msg):
